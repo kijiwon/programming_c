@@ -4,12 +4,12 @@
         unsigned char(1byte)
     •정수형
         short(2byte)
-        ⭐️int(4byte)
+        ⭐️ int(4byte)
         long(4byte)
         long long(8byte)
     •실수형
-        ⭐️float(4byte)
-        ⭐️double(8byte)
+        ⭐️ float(4byte)
+        ⭐️ double(8byte)
         long double(12~16byte)
 
 2. 변수 - 값이 저장되는 기억 공간
@@ -356,3 +356,86 @@
     ⭐️ &a[0]+1 → 다음 행(두 번째 행)의 시작 주소(a[1][0]) 112
     a+1 → 다음 행(두 번째 행)의 시작 주소(a[1][0]) 112
     &a+1 → 전체 배열의 다음 위치의 주소(3*4*2 = 124) 124
+
+12. 구조체 - 다양한 자료형으로 이루어진 데이터를 하나의 단위로 묶는 사용자 정의 자료형
+    •선언 및 정의 - struct 키워드를 사용해 선언
+        struct Student {
+            char name[50];
+            int age;
+            float grade;
+        };
+    •구조체 변수 선언 - 구조체 변수를 선언해 데이터를 저장
+        struct Student {
+            char name[50];
+            int age;
+            float grade;
+        };
+        struct Student s1, s2;
+    •구조체 변수 초기화 - 선언 시 초기화하거나 이후에 값을 할당
+        struct Student {
+            char name[50];
+            int age;
+            float grade;
+        };
+        struct Student s1 = {"Lee", 45, 3.5}; // 순서대로 할당
+    •구조체 멤버 접근 - 점 연산자(.)를 사용
+        struct Student s1 = {"Lee", 45, 3.5};
+        printf("Name: %s\n", s1.name); // Name: Lee
+    •구조체 배열 - 배열로 선언해 여러 데이터를 저장할 수 있음
+        struct Student {
+            char name[50];
+            int age;
+            float grade;
+        };
+        int main(){
+            struct Student st[3] = {
+                {"Lee", 17, 2.8},
+                {"Kim", 19, 3.5},
+                {"Park", 20, 4.0}
+            };
+            for(int i = 0; i < 3; i++){
+                printf("%s, %d, %.2f\n", st[i].name, st[i].age, st[i].grade);
+            }
+            return 0;
+        }
+    •구조체 포인터 - 구조체를 포인터로 사용. 화살표 연산자(→)를 사용해 멤버에 접근
+        struct Student {
+            char name[50];
+            int age;
+            float grade;
+        };
+        int main() {
+            struct Student s1 = {"Lee", 18, 2.5};
+            struct Student *ptr = &s1; // s1의 주소를 할당
+            printf("%s\n", ptr→name); // Lee
+            return 0;
+        }
+    •typedef와 구조체 - typedef를 사용해 구조체에 별칭을 붙이면 struct 키워드 없이 구조체를 사용할 수 있음
+        int main(){
+        typedef struct {
+            char name[50];
+            int age;
+            float grade;
+        } Student;
+        Student s1 = {"Lee", 18, 2.5};
+        }
+    •중첩 구조체 - 구조체 안에 또 다른 구조체를 포함
+        int main() {
+            struct Address {
+                char city[50];
+                int zipCode;
+            };
+            struct Person {
+                char name[50];
+                struct Address address; // 중첩 구조체
+            };
+        }
+
+13. 공용체 - 여러 멤버를 정의. 가장 큰 멤버의 크기만큼의 메모리만 할당
+    하나의 메모리 공간을 공유하기 때문에 한 시점에 하나의 멤버만 값을 저장
+    •선언 및 정의 - union 키워드를 사용해 선언
+        union Data {
+            int i; // 4byte
+            float f; // 4byte
+            char str[20]; // 20byte
+        }; → 20byte 크기를 가진 공용체
