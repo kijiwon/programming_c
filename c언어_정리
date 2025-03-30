@@ -439,3 +439,27 @@
             float f; // 4byte
             char str[20]; // 20byte
         }; → 20byte 크기를 가진 공용체
+
+14. 프로세스 생성
+    ◼︎ fork: 새로운 프로세스(자식 프로세스)를 생성하기 위해 부모 프로세스를 복제하여 동일한 메모리 공간을 부여
+        부모와 자식 프로세스는 동일한 코드를 실행하지만 프로세스 ID(PID)를 통해 구분
+        ○동작 방식
+            •fork()는 호출 시 두 번 반환
+                - 부모 프로세스에서는 자식 프로세스의 PID 반환(양수)
+                - 자식 프로세스에서는 0을 반환
+                - 프로세스 생성 실패 시 음수 반환
+        ○활용 예시
+            #include <stdio.h>
+            #include <unistd.h>
+
+            int main() {
+                pid_t pid = fork(); // pid_t → 프로세스 ID를 받을 수 있는 자료형
+                if(pid > 0) { // 부모 프로세스
+                    printf("P PID = %d, C PID = %d\n", getpid(), pid);
+                } else if(pid == 0) { // 자식 프로세스
+                    printf("C PID = %d\n", getpid());
+                } else { // 프로세스 실패
+                    printf("Fork failed.\n");
+                }
+                return 0;
+            }
