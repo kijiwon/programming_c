@@ -467,7 +467,7 @@
 15. C언어 주요 함수
     ◼︎ 문자열 함수 <string.h>
         •strlen(a): a 문자열의 길이를 반환
-        •strcpy(a, b): a애 b 문자열을 복사
+        •strcpy(a, b): a에 b 문자열을 복사
         •strncpy(a, b, n): a에 b 문자열을 n번째 인덱스 앞까지 복사
         •strcat(a, b): a 문자열 뒤에 b 문자열을 이어 붙임
         •strncat(a, b, n): a 문자열 뒤에 b 문자열의 n번째 인덱스 앞까지 이어 붙임
